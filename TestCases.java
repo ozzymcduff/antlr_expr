@@ -8,11 +8,26 @@
 ***/
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
-
-public class Test {
-    public static void main(String[] args) throws Exception {
+import org.junit.*;
+import static org.junit.Assert.*;
+import java.io.*;
+import java.util.*;
+public class TestCases {
+    private class TestEval extends Eval{
+        public TestEval(TreeNodeStream input){
+            super(input);
+        }
+        public ArrayList expr = new ArrayList(); 
+        @Override public void onExpr(int value){
+            expr.add(value);
+            //System.out.println(value);
+        }   
+    }
+    @Test public void multiple_expressions_should_be_evaluated()
+        throws IOException, RecognitionException{
         // Create an input character stream from standard in
-        ANTLRInputStream input = new ANTLRInputStream(System.in);
+        ANTLRInputStream input = new ANTLRInputStream(new StringBufferInputStream(
+            "1+23\na=34\nb=23\na+b\n"));
         // Create an ExprLexer that feeds from that stream
         ExprLexer lexer = new ExprLexer(input);
         // Create a stream of tokens fed by the lexer
@@ -26,7 +41,13 @@ public class Test {
         CommonTree t = (CommonTree)r.getTree(); // get tree from parser
         // Create a tree node stream from resulting tree
         CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-        Eval walker = new Eval(nodes); // create a tree parser
+        TestEval walker = new TestEval(nodes); // create a tree parser
         walker.prog();                 // launch at start rule prog
+        int[] expected = {24, 57};
+
+        for (int i=0;i< expected.length ; i++) {
+            assertEquals(walker.expr.get(i),expected[i]);
+            //System.out.println(i); 
+        }
     }
 }

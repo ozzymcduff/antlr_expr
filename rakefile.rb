@@ -13,7 +13,7 @@ task :defualt=>[:build]
 #puts "File::SEPARATOR: #{File::SEPARATOR}"
 #puts "File::SEPARATOR: #{File::PATH_SEPARATOR}"
 desc "compile"
-task :build => [:evalgrammar] do
+task :build do
 	sh "javac -cp #{classpath} ./*.java -d ./bin"
 end
 
@@ -26,7 +26,7 @@ task :run=>[:build] do
 end
 
 task :test=>[:build] do
-	sh "java -classpath #{classpath_and_bin} Test"
+	sh "java -classpath #{classpath_and_bin} org.junit.runner.JUnitCore TestCases"
 end
 
 task :clean do

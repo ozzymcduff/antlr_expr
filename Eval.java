@@ -1,4 +1,4 @@
-// $ANTLR 3.4 Eval.g 2012-12-23 10:22:41
+// $ANTLR 3.4 Eval.g 2012-12-23 14:42:00
 
 import java.util.HashMap;
 
@@ -47,18 +47,21 @@ public class Eval extends TreeParser {
 
 
     /** Map variable name to Integer object holding value */
-    HashMap memory = new HashMap();
+    public HashMap memory = new HashMap();
+    public void onExpr(int value){
+        System.out.println(value);
+    }
 
 
 
     // $ANTLR start "prog"
-    // Eval.g:20:1: prog : ( stat )+ ;
+    // Eval.g:23:1: prog : ( stat )+ ;
     public final void prog() throws RecognitionException {
         try {
-            // Eval.g:20:5: ( ( stat )+ )
-            // Eval.g:20:9: ( stat )+
+            // Eval.g:23:5: ( ( stat )+ )
+            // Eval.g:23:9: ( stat )+
             {
-            // Eval.g:20:9: ( stat )+
+            // Eval.g:23:9: ( stat )+
             int cnt1=0;
             loop1:
             do {
@@ -72,7 +75,7 @@ public class Eval extends TreeParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // Eval.g:20:9: stat
+            	    // Eval.g:23:9: stat
             	    {
             	    pushFollow(FOLLOW_stat_in_prog51);
             	    stat();
@@ -111,7 +114,7 @@ public class Eval extends TreeParser {
 
 
     // $ANTLR start "stat"
-    // Eval.g:22:1: stat : ( expr | ^( '=' ID expr ) );
+    // Eval.g:25:1: stat : ( expr | ^( '=' ID expr ) );
     public final void stat() throws RecognitionException {
         CommonTree ID2=null;
         int expr1 =0;
@@ -120,7 +123,7 @@ public class Eval extends TreeParser {
 
 
         try {
-            // Eval.g:22:5: ( expr | ^( '=' ID expr ) )
+            // Eval.g:25:5: ( expr | ^( '=' ID expr ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -139,27 +142,27 @@ public class Eval extends TreeParser {
             }
             switch (alt2) {
                 case 1 :
-                    // Eval.g:22:9: expr
+                    // Eval.g:25:8: expr
                     {
-                    pushFollow(FOLLOW_expr_in_stat62);
+                    pushFollow(FOLLOW_expr_in_stat61);
                     expr1=expr();
 
                     state._fsp--;
 
 
-                    System.out.println(expr1);
+                    onExpr(expr1); 
 
                     }
                     break;
                 case 2 :
-                    // Eval.g:24:9: ^( '=' ID expr )
+                    // Eval.g:27:9: ^( '=' ID expr )
                     {
-                    match(input,13,FOLLOW_13_in_stat83); 
+                    match(input,13,FOLLOW_13_in_stat82); 
 
                     match(input, Token.DOWN, null); 
-                    ID2=(CommonTree)match(input,ID,FOLLOW_ID_in_stat85); 
+                    ID2=(CommonTree)match(input,ID,FOLLOW_ID_in_stat84); 
 
-                    pushFollow(FOLLOW_expr_in_stat87);
+                    pushFollow(FOLLOW_expr_in_stat86);
                     expr3=expr();
 
                     state._fsp--;
@@ -190,7 +193,7 @@ public class Eval extends TreeParser {
 
 
     // $ANTLR start "expr"
-    // Eval.g:30:1: expr returns [int value] : ( ^( '+' a= expr b= expr ) | ^( '-' a= expr b= expr ) | ^( '*' a= expr b= expr ) | ID | INT );
+    // Eval.g:33:1: expr returns [int value] : ( ^( '+' a= expr b= expr ) | ^( '-' a= expr b= expr ) | ^( '*' a= expr b= expr ) | ID | INT );
     public final int expr() throws RecognitionException {
         int value = 0;
 
@@ -203,7 +206,7 @@ public class Eval extends TreeParser {
 
 
         try {
-            // Eval.g:31:5: ( ^( '+' a= expr b= expr ) | ^( '-' a= expr b= expr ) | ^( '*' a= expr b= expr ) | ID | INT )
+            // Eval.g:34:5: ( ^( '+' a= expr b= expr ) | ^( '-' a= expr b= expr ) | ^( '*' a= expr b= expr ) | ID | INT )
             int alt3=5;
             switch ( input.LA(1) ) {
             case 11:
@@ -241,18 +244,18 @@ public class Eval extends TreeParser {
 
             switch (alt3) {
                 case 1 :
-                    // Eval.g:31:9: ^( '+' a= expr b= expr )
+                    // Eval.g:34:9: ^( '+' a= expr b= expr )
                     {
-                    match(input,11,FOLLOW_11_in_expr124); 
+                    match(input,11,FOLLOW_11_in_expr123); 
 
                     match(input, Token.DOWN, null); 
-                    pushFollow(FOLLOW_expr_in_expr128);
+                    pushFollow(FOLLOW_expr_in_expr127);
                     a=expr();
 
                     state._fsp--;
 
 
-                    pushFollow(FOLLOW_expr_in_expr132);
+                    pushFollow(FOLLOW_expr_in_expr131);
                     b=expr();
 
                     state._fsp--;
@@ -266,18 +269,18 @@ public class Eval extends TreeParser {
                     }
                     break;
                 case 2 :
-                    // Eval.g:32:9: ^( '-' a= expr b= expr )
+                    // Eval.g:35:9: ^( '-' a= expr b= expr )
                     {
-                    match(input,12,FOLLOW_12_in_expr146); 
+                    match(input,12,FOLLOW_12_in_expr145); 
 
                     match(input, Token.DOWN, null); 
-                    pushFollow(FOLLOW_expr_in_expr150);
+                    pushFollow(FOLLOW_expr_in_expr149);
                     a=expr();
 
                     state._fsp--;
 
 
-                    pushFollow(FOLLOW_expr_in_expr154);
+                    pushFollow(FOLLOW_expr_in_expr153);
                     b=expr();
 
                     state._fsp--;
@@ -291,18 +294,18 @@ public class Eval extends TreeParser {
                     }
                     break;
                 case 3 :
-                    // Eval.g:33:9: ^( '*' a= expr b= expr )
+                    // Eval.g:36:9: ^( '*' a= expr b= expr )
                     {
-                    match(input,10,FOLLOW_10_in_expr171); 
+                    match(input,10,FOLLOW_10_in_expr170); 
 
                     match(input, Token.DOWN, null); 
-                    pushFollow(FOLLOW_expr_in_expr175);
+                    pushFollow(FOLLOW_expr_in_expr174);
                     a=expr();
 
                     state._fsp--;
 
 
-                    pushFollow(FOLLOW_expr_in_expr179);
+                    pushFollow(FOLLOW_expr_in_expr178);
                     b=expr();
 
                     state._fsp--;
@@ -316,9 +319,9 @@ public class Eval extends TreeParser {
                     }
                     break;
                 case 4 :
-                    // Eval.g:34:9: ID
+                    // Eval.g:37:9: ID
                     {
-                    ID4=(CommonTree)match(input,ID,FOLLOW_ID_in_expr192); 
+                    ID4=(CommonTree)match(input,ID,FOLLOW_ID_in_expr191); 
 
 
                                 Integer v = (Integer)memory.get((ID4!=null?ID4.getText():null));
@@ -329,9 +332,9 @@ public class Eval extends TreeParser {
                     }
                     break;
                 case 5 :
-                    // Eval.g:40:9: INT
+                    // Eval.g:43:9: INT
                     {
-                    INT5=(CommonTree)match(input,INT,FOLLOW_INT_in_expr213); 
+                    INT5=(CommonTree)match(input,INT,FOLLOW_INT_in_expr212); 
 
 
                                 value = Integer.parseInt((INT5!=null?INT5.getText():null));
@@ -360,20 +363,20 @@ public class Eval extends TreeParser {
  
 
     public static final BitSet FOLLOW_stat_in_prog51 = new BitSet(new long[]{0x0000000000003C32L});
-    public static final BitSet FOLLOW_expr_in_stat62 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_stat83 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_ID_in_stat85 = new BitSet(new long[]{0x0000000000001C30L});
-    public static final BitSet FOLLOW_expr_in_stat87 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_11_in_expr124 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_expr_in_expr128 = new BitSet(new long[]{0x0000000000001C30L});
-    public static final BitSet FOLLOW_expr_in_expr132 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_12_in_expr146 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_expr_in_expr150 = new BitSet(new long[]{0x0000000000001C30L});
-    public static final BitSet FOLLOW_expr_in_expr154 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_10_in_expr171 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_expr_in_expr175 = new BitSet(new long[]{0x0000000000001C30L});
-    public static final BitSet FOLLOW_expr_in_expr179 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_ID_in_expr192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_INT_in_expr213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expr_in_stat61 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_stat82 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_ID_in_stat84 = new BitSet(new long[]{0x0000000000001C30L});
+    public static final BitSet FOLLOW_expr_in_stat86 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_11_in_expr123 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_expr_in_expr127 = new BitSet(new long[]{0x0000000000001C30L});
+    public static final BitSet FOLLOW_expr_in_expr131 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_12_in_expr145 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_expr_in_expr149 = new BitSet(new long[]{0x0000000000001C30L});
+    public static final BitSet FOLLOW_expr_in_expr153 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_10_in_expr170 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_expr_in_expr174 = new BitSet(new long[]{0x0000000000001C30L});
+    public static final BitSet FOLLOW_expr_in_expr178 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_ID_in_expr191 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_INT_in_expr212 = new BitSet(new long[]{0x0000000000000002L});
 
 }

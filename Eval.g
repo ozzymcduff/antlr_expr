@@ -12,15 +12,18 @@ import java.util.HashMap;
 
 @members {
 /** Map variable name to Integer object holding value */
-HashMap memory = new HashMap();
+public HashMap memory = new HashMap();
+public void onExpr(int value){
+    System.out.println(value);
+}
 }
 // END:members
 
 // START:stat
 prog:   stat+ ;
 
-stat:   expr
-        {System.out.println($expr.value);}
+stat:  expr
+        {onExpr($expr.value); }
     |   ^('=' ID expr)
         {memory.put($ID.text, new Integer($expr.value)); }
     ;
